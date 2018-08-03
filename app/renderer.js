@@ -46,8 +46,13 @@ function threeBlocks(){
     alert('90min');
 }
 function fourBlocks(){
-    console.log('120min');
-    alert('120min');
+    playMusic();
+}
+
+function playMusic(){
+    var audio = new Audio(__dirname + '/mp3/take_on_me.mp3');
+    audio.currentTime = 0;
+    audio.play();
 }
 
 
