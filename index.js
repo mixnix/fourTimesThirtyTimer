@@ -13,5 +13,7 @@ function boot(){
         win.webContents.send('global-shortcut', 0);
     });
 }
+    //todo: laduj bootstrapa lokanie a nie z internetu
+    //todo: trzeba zrobic to zeby dalo sie przesuwac aplikacje
 
 app.on('ready', boot)
