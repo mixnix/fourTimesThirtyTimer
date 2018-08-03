@@ -50,7 +50,7 @@ function fourBlocks(){
 }
 
 function playMusic(){
-    var audio = new Audio(__dirname + '/mp3/take_on_me.mp3');
+    var audio = new Audio(__dirname + '/../mp3/take_on_me.mp3');
     audio.currentTime = 0;
     audio.play();
 }

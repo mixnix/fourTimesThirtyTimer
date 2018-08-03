@@ -6,7 +6,7 @@ function boot(){
         width: 700,
         height: 500
     });
-    win.loadURL(`file://${__dirname}/app/index.html`)
+    win.loadURL(`file://${__dirname}/app/html/index.html`)
     //load window from html
     // win.loadURL(url.format({
     //     pathname: 'index.html',
