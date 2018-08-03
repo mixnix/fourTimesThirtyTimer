@@ -105,10 +105,10 @@ function twoBlocks(){
     setTimer(m30);
 }
 function threeBlocks(){
-    // timersTime = [m5, m30, m5, m30,];
-    // setTimer(m30);
-    timersTime = [s3, s5];
-    setTimer(s5)
+    timersTime = [m5, m30, m5, m30,];
+    setTimer(m30);
+    // timersTime = [s3, s5];
+    // setTimer(s5)
 }
 function fourBlocks(){
     timersTime = [m5, m30, m5, m30, m5, m30];
