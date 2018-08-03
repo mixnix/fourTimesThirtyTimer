@@ -10,8 +10,22 @@ var audio = new Audio(__dirname + '/../mp3/take_on_me.mp3');
 var timersTime;
 
 //const - how many second in one minute, five minutes and
-const m5 = 60*5;
-const m30 = 60*30;
+const m5 = {
+    seconds : 60*5,
+    label : "przerwa!"
+};
+const m30 = {
+    seconds : 60*30,
+    label : "blok pracy!"
+};
+const s5 = {
+    seconds : 5,
+    label : "blok pracy!"
+};
+const s3 = {
+    seconds : 3,
+    label : "przerwa"
+};
 
 initialization();
 
@@ -23,11 +37,12 @@ const secondsToTime = (s) => {
     return `${min}:${sec}`;
 };
 
-function setTimer(seconds){
+function setTimer(interval){
 
-    let currentTime = seconds;
+    let currentTime = interval.seconds;
 
     timerDiv.innerHTML = secondsToTime(currentTime);
+    labelDiv.innerHTML = interval.label;
 
     // Execute every second
     let timer = setInterval(() => {
@@ -41,9 +56,6 @@ function setTimer(seconds){
         // When reaching 0. Stop.
         if (currentTime <= 0) {
             restartMusic();
-
-            //document.querySelector('#stopMusic').addEventListener('click', removeListeners);
-
 
             clearInterval(timer);
         }
@@ -60,12 +72,13 @@ function initialization(){
         document.querySelector('#stopMusic').addEventListener('click', stopMusic);
         document.querySelector('#stopMusic').addEventListener('click', function(){
             // console.log("timerTime: " + timersTime);
-            var setTime = timersTime.shift()
+            var timerObject = timersTime.shift()
+
             // console.log("setTime: " + setTime);
-            if (setTime === undefined) {
+            if (timerObject === undefined) {
                 return;
             }else {
-                setTimer(setTime);
+                setTimer(timerObject);
             }
         });
     }
@@ -78,6 +91,8 @@ function oneBlock(){
 function twoBlocks(){
     timersTime = [m5, m30];
     setTimer(m30);
+    // timersTime = [s3, s5];
+    // setTimer(s5)
 }
 function threeBlocks(){
     timersTime = [m5, m30, m5, m30,];
