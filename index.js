@@ -1,4 +1,4 @@
-const {app, BrowserWindow} = require('electron')
+const {app, BrowserWindow, globalShortcut} = require('electron')
 const url = require('url');
 
 function boot(){
@@ -7,11 +7,12 @@ function boot(){
         height: 500
     });
     win.loadURL(`file://${__dirname}/app/html/index.html`)
-    //load window from html
-    // win.loadURL(url.format({
-    //     pathname: 'index.html',
-    //     slashes: true
-    // }))
+
+    globalShortcut.register('ctrl+shift+alt+end', function () {
+        win.webContents.send('global-shortcut', 0);
+    });
+
+
 }
 
 

@@ -9,6 +9,9 @@ var audio = new Audio(__dirname + '/../mp3/take_on_me.mp3');
 //array storing how many and how long the timers should be
 var timersTime;
 
+//for  message getting from main thread
+
+
 //const - how many second in one minute, five minutes and
 const m5 = {
     seconds : 60*5,
@@ -62,6 +65,23 @@ function setTimer(interval){
     }, 1000); // 1 second
 }
 
+function setNextTimer() {
+    // console.log("timerTime: " + timersTime);
+    var timerObject = timersTime.shift()
+
+    // console.log("setTime: " + setTime);
+    if (timerObject === undefined) {
+        return;
+    }else {
+        setTimer(timerObject);
+    }
+}
+
+ipcRenderer.on('global-shortcut', function (arg) {
+    stopMusic();
+    setNextTimer();
+});
+
 function initialization(){
     window.onload = function(){
         document.querySelector('#one').addEventListener('click', oneBlock);
@@ -70,17 +90,9 @@ function initialization(){
         document.querySelector('#four').addEventListener('click', fourBlocks);
 
         document.querySelector('#stopMusic').addEventListener('click', stopMusic);
-        document.querySelector('#stopMusic').addEventListener('click', function(){
-            // console.log("timerTime: " + timersTime);
-            var timerObject = timersTime.shift()
+        document.querySelector('#stopMusic').addEventListener('click', setNextTimer);
 
-            // console.log("setTime: " + setTime);
-            if (timerObject === undefined) {
-                return;
-            }else {
-                setTimer(timerObject);
-            }
-        });
+
     }
 }
 
@@ -91,12 +103,12 @@ function oneBlock(){
 function twoBlocks(){
     timersTime = [m5, m30];
     setTimer(m30);
-    // timersTime = [s3, s5];
-    // setTimer(s5)
 }
 function threeBlocks(){
-    timersTime = [m5, m30, m5, m30,];
-    setTimer(m30);
+    // timersTime = [m5, m30, m5, m30,];
+    // setTimer(m30);
+    timersTime = [s3, s5];
+    setTimer(s5)
 }
 function fourBlocks(){
     timersTime = [m5, m30, m5, m30, m5, m30];
